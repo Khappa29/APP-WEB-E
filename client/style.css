@@ -1,8 +1,10 @@
 ﻿/* fond de page */
 body {
+  font-family:"trebuchet ms",sans-serif;
+  font-size:90%;
   background-size: 100%;
   background-repeat: no-repeat;
-  color: white;
+  color: black;
   height: 100vh;
   margin: 0;
   /* pour éviter l'ascenseur */
