@@ -27,15 +27,27 @@
   <form id="station_form" action='YearSpan'>
     Année de début: <input id="debut" type="text" name="debut"><br>
     Année de fin: <input id="fin" type="text" name="fin"><br>
-    <!--Pas de temps (jours): <input id="pas" type="text" name="pas"><br>-->
-    <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
+    <input type="submit" value="Ok">
+  </form>
+  </fieldset>
+  <fieldset>
+  <legend> Comparez deux années pour une même station </legend>
+  <form id="year_comp" action='YearComp'>
+    Année n°1: <input id="annee1" type="text" name="annee1"><br>
+    Année n°2: <input id="annee2" type="text" name="annee2"><br>
     <input type="submit" value="Ok">
   </form>
   </fieldset>
   <fieldset>
   <legend> Comparer deux stations différentes </legend>
   <form id="station_comp" action='compareSta'>
-    Station à comparer: <input id="ST2" type="text" name="ST2"><br>
+    Stations à comparer: <input id="ST2" type="text" name="ST2"><br>
+    <label for="Stations">Stations à comparer : </label>
+   <select name="Stations" id="Stations">
+   <option value="Lyons"> Lyon</option>
+   <option value="Marseille"> Marseille</option>
+   <option value="Nice"> Nice</option>
+   </select>
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
     <input type="submit" value="Comparer">
   </form>
