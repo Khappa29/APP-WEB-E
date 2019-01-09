@@ -42,16 +42,17 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     if self.path_info[0] == 'time':
       self.send_time()
    
-     # le chemin d'accès commence par /regions
-    elif self.path_info[0] == 'regions':
-      self.send_regions()
-    # le chemin d'accès commence par /temperature
+    # on regarde par quoi commence de chemin d'accès
+    # on demande la station
+    if self.path_info[0] == 'regions':
+        self.send_regions()
+    # on demande la station
     elif self.path_info[0] == 'temperature':
-      self.send_image()
-    #L'utilisateur a spécifié un intervalle d'années
+        self.send_image()
+    # on spécifie un intervalle d'années
     elif self.path_info[0] == 'YearSpan':
         self.send_image(1)
-        
+    # on spécifie une station à comparer
     elif self.path_info[0] == 'STComp':
         self.send_image(2)
     
@@ -98,27 +99,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         self.params = parse_qs(self.body)
     else:
       self.body = ''
-
-  #
-  # On envoie un document avec l'heure
-  #
-  def send_time(self):
-    
-    # on récupère l'heure
-    time = self.date_time_string()
-
-    # on génère un document au format html
-    body = '<!doctype html>' + \
-           '<meta charset="utf-8">' + \
-           '<title>l\'heure</title>' + \
-           '<div>Voici l\'heure du serveur :</div>' + \
-           '<pre>{}</pre>'.format(time)
-
-    # pour prévenir qu'il s'agit d'une ressource au format html
-    headers = [('Content-Type','text/html;charset=utf-8')]
-
-    # on envoie
-    self.send(body,headers)
 
   #
   # On génère et on renvoie la liste des régions et leur coordonnées (version TD3)
