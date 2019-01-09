@@ -12,8 +12,7 @@ import matplotlib.dates as pltd
 
 import sqlite3
 
-#database = "temperatures.db"
-database = "temp.sqlite"
+database = "base.sqlite"
 
 def multiplication_liste(L):
     """ Fonction qui réalise un changement d'échelle des données."""
@@ -130,7 +129,17 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     r = c.fetchall()
     
     headers = [('Content-Type','application/json')];
-    body = json.dumps([{'s':staid, 'nom':n, 'lat':lat, 'lon': lon} for (staid,n,lat,lon) in r])
+    # il faut modifier l'écriture de la latitude et de la longitude
+    # pour cela il faut détailler l'écrutire de cette liste (ou dictionnaire)
+    # écrire ces chiffres en décimale
+    DicoStations = []
+    for (staid,staname,lat,lon,hght) in r:
+        latn = float(lat[1:3]) + float(lat[4:6])/60 + float(lat[7:])/3600
+        lonn = float(lon[1:4]) + float(lon[5:7])/60 + float(lon[8:])/3600
+        if lon[0] == '-':
+            lonn *= -1
+        DicoStations.append({'s':staid, 'nom':staname, 'lat': latn, 'lon':lonn ,'hght':hght})
+    body = json.dumps(DicoStations)
     self.send(body,headers)
 
   #
