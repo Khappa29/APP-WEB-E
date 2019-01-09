@@ -54,6 +54,9 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         
     elif self.path_info[0] == 'STComp':
         self.send_image(2)
+    
+    elif self.path_info[0] == 'YearComp':
+        self.send_image_2_annees()
         
     # ou pas...
     else:
@@ -283,7 +286,67 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     
     conn = sqlite3.connect(database)
     c = conn.cursor()
+    
+    STAID = self.params['STAID'][0]
+    annee1 = int(self.params['annee1'][0])
+    annee2 = int(self.params['annee2'][0])
+    #pas = int(self.params['pas'][0])
+    
+    c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    r = c.fetchall()
+    R1 = []
+    R2 = []
+    # On ne garde que les éléments qui sont les bonnes années
+    # On peut le faire directement dans la requête SQL mais flemme et c'est plus safe
+    for elem in r:
+        year = int(elem[2][0:4])
+        #print(year,debut,fin)
+        if year == annee1:
+            R1.append(elem)
+        elif year == annee2:
+            R2.append(elem)
+    
+    # On plot la première station
+    x1 = [pltd.date2num(dt.date(annee1,int(a[2][4:6]),int(a[2][6:]))) for a in R1]
+    # récupération de la régularité (colonne 8)
+    y1 = [float(a[3]) for a in R1]
+    #Dilatation ou rétraction...
+    y1 = multiplication_liste(y1)
+    # tracé de la courbe
+    plt.plot(x1,y1,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature en "+str(annee1))
+    
+    # On plot la première station
+    x2 = [pltd.date2num(dt.date(annee1,int(a[2][4:6]),int(a[2][6:]))) for a in R2]
+    # récupération de la régularité (colonne 8)
+    y2 = [float(a[3]) for a in R2]
+    #Dilatation ou rétraction...
+    y2 = multiplication_liste(y2)
+    # tracé de la courbe
+    plt.plot(x2,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
+    
+    
+    # légendes
+    plt.legend(loc='lower left')
+    plt.title('Températures entre deux années',fontsize=16) 
 
+    # génération des courbes dans un fichier PNG
+    fichier = 'courbes/temperature_'+str(STAID) +'.png'
+    #fichier = 'courbes/temperature.png'
+    plt.savefig('client/{}'.format(fichier))
+    plt.close()
+    
+    #Génération de l'html qui va afficher l'image à part
+    """html='<!DOCTYPE html><title>Temperature</title>' +\
+    '<meta charset="utf-8">' +\
+    '<img src="/{}?{}" alt="temperature {}" width="100%">'.format(fichier,self.date_time_string(),self.path)"""
+    body = json.dumps({
+            'title': 'Température pour la station n° '+STAID, \
+            'img': '/'+fichier \
+             });
+    # on envoie
+    headers = [('Content-Type','application/json')];
+    #if mode == 0:
+    self.send(body,headers)
 
   #
   # On envoie les entêtes et le corps fourni
