@@ -105,7 +105,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     conn = sqlite3.connect(database)
     c = conn.cursor()
     
-    c.execute("SELECT * FROM 'stations_meteo'")
+    c.execute("SELECT * FROM 'stations-meteo'")
     r = c.fetchall()
     
     headers = [('Content-Type','application/json')];
