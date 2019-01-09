@@ -127,6 +127,30 @@ station_comp.onsubmit = function(e)
   console.log("Request send");
 }
 
+var year_comp = document.getElementById("year_comp");
+station_comp.onsubmit = function(e)
+{
+  e.preventDefault();
+  
+  var STAID = current;
+  var annee1 = document.getElementById("annee1");
+  var annee2 = document.getElementById("annee2");
+  var image =  document.querySelector('#reponse img');
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onload = function()
+  {
+    console.log("Response received");
+    image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
+  }
+
+  image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
+  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value,true);
+  xhr.send();
+  console.log("Request sent");
+}
+
 function load_data () {
     var xhr = new XMLHttpRequest();
     xhr.onload = function() {   // fonction callback
