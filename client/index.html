@@ -2,7 +2,7 @@
 
 <script src="leaflet.js"> // insertion bibliothèque Leaflet : http://leafletjs.com/ </script>
 
-<title>TD3-s7.html</title>
+<title>Carte_Météo.html</title>
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
 <link rel="stylesheet" type="text/css" href="style.css"/>
 
@@ -14,30 +14,33 @@
 
 <body onload="load_data()">  <!-- Récupération des données avec le chargement de la page -->
 
-<h1>Les Températures en France</h1>
+<h1>Carte des températures en France</h1>
  <!-- <label><span>Région :</span><input id="region" name="Region"> 
  <button id="bouton">Afficher la courbe</button>  </label>  -->
- <div id="map"></div>  
+<div id="map"></div>  
 <div id="reponse">
-  <p align="center"></p>
-  <img width="70%" src="" />
+  <p align="margin-right"></p>
+  <img width="50%" src="" />
 </div>
-<div>
-  <h3> Choississez de quelle année à quelle année vous souhaitez afficher les températures </h3>
+<fieldset>
+  <legend> Choississez de quelle année à quelle année vous souhaitez afficher les températures </legend>
   <form id="station_form" action='YearSpan'>
     Année de début: <input id="debut" type="text" name="debut"><br>
     Année de fin: <input id="fin" type="text" name="fin"><br>
     <!--Pas de temps (jours): <input id="pas" type="text" name="pas"><br>-->
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
-    <input type="submit" value="Submit">
+    <input type="submit" value="Ok">
   </form>
-  <p></p>
+  </fieldset>
+  <fieldset>
+  <legend> Comparer deux stations différentes </legend>
   <form id="station_comp" action='compareSta'>
     Station à comparer: <input id="ST2" type="text" name="ST2"><br>
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
-    <input type="submit" value="Submit">
+    <input type="submit" value="Comparer">
   </form>
-</div>
+  </fieldset>
+
 </body>
 
 <script>
