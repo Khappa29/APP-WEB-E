@@ -254,7 +254,28 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     self.send(body,headers)
     #else:
         #self.send(html)
+
+  def send_image_2_annees(self):
+    """ fonction qui superpose les temperatures d'un station sur deux années"""
+      
+      
+    plt.rcParams.update({'font.size': 22})
+    fig1 = plt.figure(figsize=(18,6))
+    ax = fig1.add_subplot(111)
+    ax.set_ylim(bottom=-5,top=35)
+    ax.grid(which='major', color='#888888', linestyle='-')
+    ax.grid(which='minor',axis='x', color='#888888', linestyle=':')
+    ax.xaxis.set_major_locator(pltd.YearLocator())
+    ax.xaxis.set_minor_locator(pltd.MonthLocator())
+    ax.xaxis.set_major_formatter(pltd.DateFormatter('%Y'))
+    ax.xaxis.set_tick_params(labelsize=5)
+    ax.xaxis.set_label_text("Date")
+    ax.yaxis.set_label_text("Temperature (en degré)")
     
+    conn = sqlite3.connect(database)
+    c = conn.cursor()
+
+
   #
   # On envoie les entêtes et le corps fourni
   #
