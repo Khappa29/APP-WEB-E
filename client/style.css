@@ -1,74 +1,58 @@
-﻿/* fond de page */
 body {
-  font-family:"trebuchet ms",sans-serif;
-  font-size:90%;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  color: black;
-  height: 100vh;
-  margin: 0;
-  /* pour éviter l'ascenseur */
-  border: 1px solid transparent;
-  box-sizing: border-box;
-}
+ font-family:"trebuchet ms",sans-serif;
+ font-size:90%;
+ }
 
-/* bandeau de titre */
-h1 { 
-  color: black;
-  border: none;
-  box-shadow: none;
-  background-color: rgba(255,255,255,0.3);
-  border-top: 3px solid rgba(255,255,255,0.6);
-  border-bottom: 3px solid rgba(255,255,255,0.6);
-  margin-top: 1.33em;
-  text-shadow: 3px 3px 3px black;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  margin-bottom: 1.33em;
+h1 {
+  color: #DF3F3F;
+  border:1px solid #DF3F3F;
+  margin-bottom:55px;
+  padding:10px 20px 20px 10px;
+  font-weight:bold
 }
-
-/* contenu de la page */
-body > * {   padding-left: 10px; }
-
-/* polices de caractères */
-body { font-family: Trebuchet MS, sans-serif; }
-
-/* positionnement des champs */
-label { display: block; }
-label span { display: inline-block; width: 5em; height: 1.5em; }
-
-/*
-input, textarea {
-  font-family: monospace;
-  padding: 2px 0.5em;
-  width: 5em;
-  font-size: 1.2em;
-  line-height: 1.33em;
-  color: #666;
-  margin-top: 5px;
-}
-.button {
-  border: 3px outset #444;
-  background-color: #FCDEDE;
-  box-shadow: 1px 1px 1px #D83F3D inset;
-  padding: 5px 0.5em;
-  border-radius: 3px;
-  display: inline-block;
-  margin: 1em 0;
-
-  color: #eee;
-  text-shadow: #000 -1px -1px 0;
-  right: calc(100% - 8em - 3px);
-}
-*/
-/*
-a {
-  text-decoration: none;
-  color: black;
-  cursor: pointer;
-}
-*/
-a.delete:hover {
-  color: red;
-}
-#map { height: 400px; width: 600px; }
+form {
+ padding:10px;
+ width:280px;
+ }
+fieldset {
+ padding:0px 20px 20px 20px;
+ padding-top: 10px;
+ margin-bottom:10px;
+ border:1px solid #DF3F3F;
+ }
+legend {
+ color: #DF3F3F;
+ font-weight:bold
+ }
+label {
+ margin-top:10px;
+ display:block;
+ }
+label.inline {
+ display:inline;
+ margin-right:50px;
+ }
+input, textarea, select, option {
+ background-color:#FFF3F3;
+ }
+input, textarea, select {
+ padding:3px;
+ border:1px solid #F5C5C5;
+ border-radius:5px;
+ width:200px;
+ box-shadow:1px 1px 2px #C0C0C0 inset;
+ }
+select {
+ margin-top:10px;
+ }
+input[type=radio] {
+ background-color:transparent;
+ border:none;
+ width:10px;
+ }
+input[type=submit], input[type=reset] {
+ width:100px;
+ margin-left:5px;
+ box-shadow:1px 1px 1px #D83F3D;
+ cursor:pointer;
+ }
