@@ -38,9 +38,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
     # On récupère les étapes du chemin d'accès
     self.init_params()
-    # le chemin d'accès commence par /time
-    if self.path_info[0] == 'time':
-      self.send_time()
    
     # on regarde par quoi commence de chemin d'accès
     # on demande la station
