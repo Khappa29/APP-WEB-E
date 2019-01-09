@@ -18,12 +18,8 @@
  <!-- <label><span>Région :</span><input id="region" name="Region"> 
  <button id="bouton">Afficher la courbe</button>  </label>  -->
 <div id="map"></div>  
-<div id="reponse">
-  <p align="margin-right"></p>
-  <img width="50%" src="" />
-</div>
 <fieldset>
-  <legend> Choississez de quelle année à quelle année vous souhaitez afficher les températures </legend>
+  <legend> Évolution de la température entre deux années  </legend>
   <form id="station_form" action='YearSpan'>
     Année de début: <input id="debut" type="text" name="debut"><br>
     Année de fin: <input id="fin" type="text" name="fin"><br>
@@ -53,6 +49,10 @@
   </form>
   </fieldset>
 
+<div id="reponse">
+  <p align="center"></p>
+  <img width="70%" src="" />
+</div>
 </body>
 
 <script>
@@ -125,30 +125,8 @@ station_comp.onsubmit = function(e)
   xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value,true);
   xhr.send();
   console.log("Request send");
-}
-
-var year_comp = document.getElementById("year_comp");
-station_comp.onsubmit = function(e)
-{
-  e.preventDefault();
   
-  var STAID = current;
-  var annee1 = document.getElementById("annee1");
-  var annee2 = document.getElementById("annee2");
-  var image =  document.querySelector('#reponse img');
 
-  var xhr = new XMLHttpRequest();
-
-  xhr.onload = function()
-  {
-    console.log("Response received");
-    image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
-  }
-
-  image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
-  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value,true);
-  xhr.send();
-  console.log("Request sent");
 }
 
 function load_data () {
@@ -169,6 +147,8 @@ function load_data () {
     xhr.open('GET','/regions',true);
     xhr.send();
 }
+
+
 
 function OnMarkerClick (e) {
   var xhr = new XMLHttpRequest();
