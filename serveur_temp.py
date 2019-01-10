@@ -1,6 +1,3 @@
-# regularite-TER.py
-# Correpond au corrigé du dernier exercice du TD3+4 (TD3-s7.py)
-
 import http.server
 import socketserver
 from urllib.parse import urlparse, parse_qs, unquote
@@ -257,8 +254,8 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     ax.xaxis.set_major_locator(pltd.YearLocator())
     ax.xaxis.set_minor_locator(pltd.MonthLocator())
     ax.xaxis.set_major_formatter(pltd.DateFormatter('%Y'))
-    ax.xaxis.set_tick_params(labelsize=5)
-    ax.xaxis.set_label_text("Date")
+    ax.xaxis.set_tick_params(labelsize=3)
+    ax.xaxis.set_label_text("Temps (en année)")
     ax.yaxis.set_label_text("Temperature (en degré)")
     
     conn = sqlite3.connect(database)
@@ -350,4 +347,3 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 #
 httpd = socketserver.TCPServer(("", 8080), RequestHandler)
 httpd.serve_forever()
-
