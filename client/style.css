@@ -15,10 +15,9 @@ form {
  width:280px;
  }
 fieldset {
- padding:0px 20px 20px 20px;
- padding-top: 10px;
- margin-bottom:10px;
- border:1px solid #DF3F3F;
+ padding:10px 20px 20px 20px !important;
+ margin-bottom:10px !important;
+ border:1px solid #DF3F3F !important;
  }
 legend {
  color: #DF3F3F;
