@@ -9,15 +9,19 @@
 <meta charset="utf-8">
 
 <style>
-#map { height: 400px; width: 400px; float:left; margin-left:20px; margin-right:20px;}
+#map { height: 700px; width: 700px; float:left; margin-left:20px; margin-right:20px; margin-top:20px}
 </style>
 
 <body onload="load_data()">  <!-- Récupération des données avec le chargement de la page -->
 
 <h1>Carte des températures en France</h1>
- <!-- <label><span>Région :</span><input id="region" name="Region"> 
- <button id="bouton">Afficher la courbe</button>  </label>  -->
+<div class="parent">
+    <div class="child">
+        <a href="accueil.html"> Plus d'informations </a>
+    </div>
 <div id="map"></div>  
+
+</div>​
 <fieldset>
   <legend> Évolution de la température entre deux années  </legend>
   <form id="station_form" action='YearSpan'>
@@ -57,7 +61,7 @@
 
 <script>
 // Creation d'une carte dans la balise div "map", et positionne la vue sur un point donné et un niveau de zoom
-var map = L.map('map').setView([46.5,2.5], 5);
+var map = L.map('map').setView([46.3,2], 5.5);
 var current = -1;
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
