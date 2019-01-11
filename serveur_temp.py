@@ -220,7 +220,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                 R.append(elem)
         r = R
     
-    
     try:
         pas = int(self.params['pas'][0])
     except:
@@ -232,7 +231,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
-        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID = (SELECT STAID FROM 'stations-meteo' WHERE STANAME=?) ",(ST2,))
+        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(ST2,))
         r = c.fetchall()
         R = []
         # On ne garde que les éléments qui sont les bonnes années
