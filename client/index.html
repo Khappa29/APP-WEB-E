@@ -15,9 +15,15 @@
 
 <body onload="load_data()">  <!-- Récupération des données avec le chargement de la page -->
 
-<h1>Carte des températures en France</h1>
+<h1 id="titre"> Carte des températures en France</h1>
+<style>
+#titre {color: #DF3F3F;
+  border:1px solid #DF3F3F;
+  margin-bottom:55px;
+  padding:20px 20px 20px 20px;
+  font-weight:bold}
+</style>
 <div class="parent">
-    <div class="child">
         <a href="accueil.html" role="button" class="btn btn-default btn-info" target="_blank"> Plus d'informations </a>
     </div>
 <div id="map"></div>  
@@ -42,12 +48,51 @@
   <fieldset>
   <legend> Comparer deux stations différentes </legend>
   <form id="station_comp" action='compareSta'>
-    Stations à comparer: <input id="ST2" type="text" name="ST2"><br>
-    <label for="Stations">Stations à comparer : </label>
-   <select name="Stations" id="Stations">
-   <option value="Lyons"> Lyon</option>
-   <option value="Marseille"> Marseille</option>
-   <option value="Nice"> Nice</option>
+   <label for="Stations">Stations à comparer : </label>
+   <select name="Stations" id="ST2">
+   <option value="ABBEVILLE"> Abbeville</option>
+   <option value="AJACCIO"> Ajaccio</option>
+   <option value="ALENCON"> Alençon</option>
+   <option value="BASTIA"> Bastia</option>
+   <option value="BELLE ILE - LE TALUT"> Belle Île</option>
+   <option value="BORDEAUX-MERIGNAC"> Bordeaux</option>
+   <option value="BOURGES"> Bourges</option>
+   <option value="BREST-GUIPAVAS"> Brest</option>
+   <option value="CAEN-CARPIQUET"> Caen</option>
+   <option value="CAP CEPET"> Cap Cepet</option>
+   <option value="CLERMONT - FERRAND"> Clermont</option>
+   <option value="DIJON-LONGVIC"> Dijon</option>
+   <option value="EMBRUN"> Embrun</option>
+   <option value="GOURDON"> Gourdon</option>
+   <option value="LILLE-LESQUIN"> Lille</option>
+   <option value="LIMOGES - BELLEGARDE"> Limoges</option>
+   <option value="LE PUY - LOURDES"> Lourdes</option>
+   <option value="LYON - ST EXUPERY"> Lyon</option>
+   <option value="MARIGNANE"> Marignane</option>
+   <option value="MARSEILLE OBS. PALAIS-LONCHAMP"> Marseille</option>
+   <option value="METZ-FRESCATY"> Metz</option>
+   <option value="MILLAU"> Millau</option>
+   <option value="MONT-DE-MARSAN"> Mont de Marsan</option>
+   <option value="MONTELIMAR"> Montelimar</option>
+   <option value="MONTPELLIER-AEROPORT"> Montpellier</option>
+   <option value="BASEL-MULHOUSE"> Mulhouse</option>
+   <option value="NANCY-OCHEY"> Nancy</option>
+   <option value="NANTES-BOUGUENAIS"> Nantes</option>
+   <option value="NICE"> Nice</option>
+   <option value="ORLY"> Orly</option>
+   <option value="PERPIGNAN"> Perpignan</option>
+   <option value="PTE DE CHASSIRON"> Pointe de Chassiron</option>
+   <option value="PTE DE LA HAGUE"> Pointe de la Hague</option>
+   <option value="PLOUMANAC'H"> Ploumanac'h</option>
+   <option value="POITIERS - BIARD"> Poitier</option>
+   <option value="REIMS-PRUNAY"> Reims</option>
+   <option value="RENNES-ST JACQUES"> Rennes</option>
+   <option value="ROUEN-BOOS"> Rouen</option>
+   <option value="ST-GIRONS"> Saint Girons</option>
+   <option value="STRASBOURG-ENTZHEIM"> Strasbourg</option>
+   <option value="TARBES - OSSUN"> Tarbes</option>
+   <option value="TOULOUSE-BLAGNAC"> Toulouse</option>
+   <option value="TOURS"> Tours</option>
    </select>
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
     <input type="submit" value="Comparer">
