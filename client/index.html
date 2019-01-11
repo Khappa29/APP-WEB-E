@@ -26,6 +26,25 @@
 <div class="parent">
         <a href="accueil.html" role="button" class="btn btn-default btn-info" target="_blank"> Plus d'informations </a>
     </div>
+	
+	
+<script language="JavaScript">
+
+  document.write("<font color='#000000' size='2' face='trebuchet ms'>")
+  var mydate=new Date()
+  var year=mydate.getYear()
+  if (year<2000)
+  year += (year < 1900) ? 1900 : 0
+  var day=mydate.getDay()
+  var month=mydate.getMonth()
+  var daym=mydate.getDate()
+  if (daym<10)
+  daym="0"+daym
+  var dayarray=new Array("dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi")
+  var montharray=new Array(" janvier "," fevrier "," mars ","avril ","mai ","juin","juillet ","aout ","septembre "," octobre "," novembre "," décembre ")
+  document.write("Aujourd'hui nous sommmes le "+dayarray[day]+", "+daym+" "+montharray[month]+year+" <br> ")
+  document.write("</b></i></font>")
+  </script>
 <div id="map"></div>  
 
 </div>​
