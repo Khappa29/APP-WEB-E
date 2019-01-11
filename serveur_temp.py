@@ -221,17 +221,15 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                 R.append(elem)
         r = R
     
-    else:
+    if mode != 2:
+        try:
+            pas = int(self.params['pas'][0])
+        except:
+            pas = 1
+        x,y = pas_de_temps(r,pas)
         
-    
-    try:
-        pas = int(self.params['pas'][0])
-    except:
-        pas = 1
-    x,y = pas_de_temps(r,pas)
-    
-    # tracé de la courbe
-    plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
+        # tracé de la courbe
+        plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
