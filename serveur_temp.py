@@ -173,7 +173,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     
     conn = sqlite3.connect(database)
     c = conn.cursor()
-
+    
     #Disjonction de cas selon le mode (plutôt que d'écrire 3 fonctions différents)
     # cette fonction est appelée ligne 50 par là... (03/01/2019)
     if mode == 0:
@@ -194,6 +194,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))  # STAID[0][0]
         r = c.fetchall()
         # On récupères les données
+        
     else:
         STAID = self.params['STAID'][0]
         try:
@@ -220,15 +221,14 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                 R.append(elem)
         r = R
     
-    if mode != 2:
-        try:
-            pas = int(self.params['pas'][0])
-        except:
-            pas = 1
-        x,y = pas_de_temps(r,pas)
+    try:
+        pas = int(self.params['pas'][0])
+    except:
+        pas = 1
+    x,y = pas_de_temps(r,pas)
         
         # tracé de la courbe
-        plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
+    plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
@@ -332,7 +332,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     x2,y2 = pas_de_temps(R2,pas)
     
     # tracé de la courbe
-    plt.plot(x2,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
+    plt.plot(x1,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
     
     
     # légendes
