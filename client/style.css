@@ -3,7 +3,7 @@ body {
  font-size:90%;
  }
 
-h1 {
+p,h1 {
   color: #DF3F3F;
   border:1px solid #DF3F3F;
   margin-bottom:55px;
@@ -19,6 +19,7 @@ fieldset {
  margin-bottom:10px !important;
  border:1px solid #DF3F3F !important;
  }
+
 legend {
  color: #DF3F3F;
  font-weight:bold
@@ -55,3 +56,4 @@ input[type=submit], input[type=reset] {
  box-shadow:1px 1px 1px #D83F3D;
  cursor:pointer;
  }
+
