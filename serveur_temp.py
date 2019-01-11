@@ -77,7 +77,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on spécifie une station à comparer
     elif self.path_info[0] == 'STComp':
         self.send_image(2)
-    
     elif self.path_info[0] == 'YearComp':
         self.send_image_2_annees()
         
@@ -195,7 +194,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))  # STAID[0][0]
         r = c.fetchall()
         # On récupères les données
-    elif mode == 1:
+    else:
         STAID = self.params['STAID'][0]
         try:
             debut = int(self.params['debut'][0])
@@ -221,8 +220,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                 R.append(elem)
         r = R
     
-    else:
-        
     
     try:
         pas = int(self.params['pas'][0])
