@@ -18,34 +18,6 @@ def multiplication_liste(L):
         res[k]=L[k]*1/10
     return (res)
 
-def pas_de_temps(r,pas):
-    # Information sur la date
-    x = [pltd.date2num(dt.date(int(a[2][0:4]),int(a[2][4:6]),int(a[2][6:]))) for a in r]
-    # Information sur la temperature, avec dilatation
-    y = multiplication_liste([float(a[3]) for a in r])
-    
-    # On modifie selon le pas de temps choisi
-    if pas != 1:
-        lim = x[0] + pas
-        moy = 0
-        nbr = 0
-        new_x = []
-        new_y = []
-        for i in range(len(r)):
-            if x[i] < lim: #créé la moyenne des temperature comprises dans le pas de temps
-                moy += y[i]
-                nbr += 1
-            else:
-                new_x.append(lim-pas)
-                new_y.append(moy/nbr)
-                
-                moy = 0
-                nbr = 0
-                lim += pas
-        return new_x,new_y
-    else:
-        return x,y
-    
 
 #
 # Définition du nouveau handler
@@ -221,14 +193,14 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
                 R.append(elem)
         r = R
         
-    try:
-        pas = int(self.params['pas'][0])
-    except:
-        pas = 1
-    x,y = pas_de_temps(r,pas)
-    
+    # On plot la première station
+    x = [pltd.date2num(dt.date(int(a[2][0:4]),int(a[2][4:6]),int(a[2][6:]))) for a in r]
+    # récupération de la régularité (colonne 8)
+    y = [float(a[3]) for a in r]
+    #Dilatation ou rétraction...
+    y_fin = multiplication_liste(y)
     # tracé de la courbe
-    plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
+    plt.plot(x,y_fin,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
@@ -242,15 +214,13 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             #print(year,debut,fin)
             if year >= debut and year <= fin:
                 R.append(elem)
-        
-        try:
-            pas = int(self.params['pas'][0])
-        except:
-            pas = 1
-        x,y = pas_de_temps(R,pas)
-        
+        x = [pltd.date2num(dt.date(int(a[2][0:4]),int(a[2][4:6]),int(a[2][6:]))) for a in R]
+        # récupération de la régularité (colonne 8)
+        y = [float(a[3]) for a in R]
+        #Dilatation ou rétraction...
+        y_fin = multiplication_liste(y)
         # tracé de la courbe pour la deuxième station
-        plt.plot(x,y,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature St n°" + ST2)
+        plt.plot(x,y_fin,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature St n°" + ST2)
             
     # légendes
     plt.legend(loc='lower left')
@@ -316,21 +286,21 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         elif year == annee2:
             R2.append(elem)
     
-    try:
-        pas = int(self.params['pas'][0])
-    except:
-        pas = 1
-    x1,y1 = pas_de_temps(R1,pas)
-    
+    # On plot la première station
+    x1 = [pltd.date2num(dt.date(annee1,int(a[2][4:6]),int(a[2][6:]))) for a in R1]
+    # récupération de la régularité (colonne 8)
+    y1 = [float(a[3]) for a in R1]
+    #Dilatation ou rétraction...
+    y1 = multiplication_liste(y1)
     # tracé de la courbe
     plt.plot(x1,y1,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature en "+str(annee1))
     
-    try:
-        pas = int(self.params['pas'][0])
-    except:
-        pas = 1
-    x2,y2 = pas_de_temps(R2,pas)
-    
+    # On plot la première station
+    x2 = [pltd.date2num(dt.date(annee1,int(a[2][4:6]),int(a[2][6:]))) for a in R2]
+    # récupération de la régularité (colonne 8)
+    y2 = [float(a[3]) for a in R2]
+    #Dilatation ou rétraction...
+    y2 = multiplication_liste(y2)
     # tracé de la courbe
     plt.plot(x2,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
     
