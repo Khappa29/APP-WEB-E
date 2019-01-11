@@ -52,6 +52,14 @@
 
 </div>​
 <fieldset>
+  <legend> Paramètres généraux </legend>
+  <form id="pas_form" action='SetPas'>
+    Pas de temps (Jours): <input id="pas" type="text" name="pas"><br>
+    <input type="submit" value="Ok">
+  </form>
+</fieldset>
+
+<fieldset>
   <legend> Évolution de la température entre deux années  </legend>
   <form id="station_form" action='YearSpan'>
     Année de début: <input id="debut" type="text" name="debut"><br>
@@ -123,13 +131,6 @@
   </fieldset>
 </div>
 
-<fieldset>
-  <legend> Paramètres généraux </legend>
-  <form id="pas_form" action='SetPas'>
-    Pas de temps (Jours): <input id="pas" type="text" name="pas"><br>
-    <input type="submit" value="Ok">
-  </form>
-</fieldset>
 
 <div id="reponse">
   <p align="center"></p>
