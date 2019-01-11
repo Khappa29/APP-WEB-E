@@ -142,6 +142,7 @@
 var map = L.map('map').setView([46.3,2], 5.5);
 var current = -1;
 var pas = 1;
+var loading_anim = 'loading.gif'
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -173,7 +174,7 @@ station_form.onsubmit = function(e)
       image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
     }
     // Animation GIF entre l'envoi de la requête et la réception de le réponse
-    image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
+    image.src = loading_anim;
     // Envoi de la requête
     xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current + "&pas=" + pas.value,true);
     xhr.send();
@@ -203,7 +204,7 @@ station_comp.onsubmit = function(e)
     image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
   }
 
-  image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
+  image.src = loading_anim;
   xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value + "&pas=" + pas.value,true);
   xhr.send();
   console.log("Request send");
@@ -229,7 +230,7 @@ year_comp.onsubmit = function(e)
     image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
   }
 
-  image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
+  image.src = loading_anim;
   xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value,true);
   xhr.send();
   console.log("Request sent");
@@ -276,7 +277,7 @@ function OnMarkerClick (e) {
   };
 
   current = e.target.idreg;
-  image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
+  image.src = loading_anim;
   xhr.open('GET','/temperature/' + e.target.idreg, true);  // on récupère la courbe par un appel au serveur
   xhr.send();
 }
