@@ -167,10 +167,16 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))  # STAID[0][0]
         r = c.fetchall()
         # On récupères les données
-    else:
+    elif mode == 1:
         STAID = self.params['STAID'][0]
-        debut = int(self.params['debut'][0])
-        fin = int(self.params['fin'][0])
+        try:
+            debut = int(self.params['debut'][0])
+        except:
+            debut = 1978
+        try:
+            fin = int(self.params['fin'][0])
+        except:
+            fin = 2018
         #pas = int(self.params['pas'][0])
         if mode == 2:
             ST2 = self.params['ST2'][0]
@@ -198,7 +204,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
-        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(ST2,))
+        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID = (SELECT STAID FROM 'stations-meteo' WHERE STANAME=?) ",(ST2,))
         r = c.fetchall()
         R = []
         # On ne garde que les éléments qui sont les bonnes années
