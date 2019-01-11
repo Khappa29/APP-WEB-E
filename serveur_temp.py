@@ -320,19 +320,19 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         pas = int(self.params['pas'][0])
     except:
         pas = 1
+        
     x1,y1 = pas_de_temps(R1,pas)
+    x = range(0,pas*len(y1),pas)
     
     # tracé de la courbe
-    plt.plot(x1,y1,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature en "+str(annee1))
+    plt.plot(x,y1,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature en "+str(annee1))
     
-    try:
-        pas = int(self.params['pas'][0])
-    except:
-        pas = 1
+    
     x2,y2 = pas_de_temps(R2,pas)
+    x = range(0,pas*len(y2),pas)
     
     # tracé de la courbe
-    plt.plot(x1,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
+    plt.plot(x,y2,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature en "+str(annee2))
     
     
     # légendes
