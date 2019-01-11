@@ -9,6 +9,10 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 <meta charset="utf-8">
 
+<img align="right"src="Earth.gif" height="70" width="70" id="Terre">
+<style>
+#Terre {margin-left:20px; margin-right:40px; margin-top:10px}
+</style>
 <style>
 #map { height: 700px; width: 700px; float:left; margin-left:20px; margin-right:20px; margin-top:20px}
 </style>
@@ -31,23 +35,6 @@
 </style>
 	
 	
-<script language="JavaScript">
-
-  document.write("<font color='#000000' size='2' face='trebuchet ms'>")
-  var mydate=new Date()
-  var year=mydate.getYear()
-  if (year<2000)
-  year += (year < 1900) ? 1900 : 0
-  var day=mydate.getDay()
-  var month=mydate.getMonth()
-  var daym=mydate.getDate()
-  if (daym<10)
-  daym="0"+daym
-  var dayarray=new Array("dimanche","lundi","mardi","mercredi","jeudi","vendredi","samedi")
-  var montharray=new Array(" janvier "," fevrier "," mars ","avril ","mai ","juin","juillet ","aout ","septembre "," octobre "," novembre "," décembre ")
-  document.write("Aujourd'hui nous sommmes le "+dayarray[day]+" "+daym+" "+montharray[month]+year+" <br> ")
-  document.write("</b></i></font>")
-  </script>
 <div id="map"></div>  
 
 </div>​
