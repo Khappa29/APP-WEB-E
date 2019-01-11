@@ -220,7 +220,10 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             if year >= debut and year <= fin:
                 R.append(elem)
         r = R
+    
+    else:
         
+    
     try:
         pas = int(self.params['pas'][0])
     except:

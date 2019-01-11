@@ -34,8 +34,11 @@
   <form id="station_form" action='YearSpan'>
     Année de début: <input id="debut" type="text" name="debut"><br>
     Année de fin: <input id="fin" type="text" name="fin"><br>
-    Pas de temps: <input id="pas" type="text" name="pas"><br>
+    
     <input type="submit" value="Ok">
+  </form>
+  <form id="pas_form" action='SetPas'>
+    Pas de temps: <input id="pas" type="text" name="pas"><br>
   </form>
   </fieldset>
   <fieldset>
@@ -111,6 +114,7 @@
 // Creation d'une carte dans la balise div "map", et positionne la vue sur un point donné et un niveau de zoom
 var map = L.map('map').setView([46.3,2], 5.5);
 var current = -1;
+var pas = 1;
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -130,7 +134,6 @@ station_form.onsubmit = function(e)
     // On récupère les différentes données
     var debut = document.getElementById("debut");
     var fin = document.getElementById("fin");
-    var pas = document.getElementById("pas");
     var STAID = document.getElementById("STAID");
     var image =  document.querySelector('#reponse img');
     // On initialise une nouvelle requête
@@ -164,7 +167,6 @@ station_comp.onsubmit = function(e)
   var debut = document.getElementById("debut");
   var fin = document.getElementById("fin");
   var image =  document.querySelector('#reponse img');
-  var pas = document.getElementById("pas");
 
   var xhr = new XMLHttpRequest();
 
@@ -191,7 +193,6 @@ year_comp.onsubmit = function(e)
   var annee1 = document.getElementById("annee1");
   var annee2 = document.getElementById("annee2");
   var image =  document.querySelector('#reponse img');
-  var pas = document.getElementById("pas");
 
   var xhr = new XMLHttpRequest();
 
@@ -205,6 +206,13 @@ year_comp.onsubmit = function(e)
   xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value,true);
   xhr.send();
   console.log("Request sent");
+}
+
+var pas_form = document.getElementById("pas_form");
+pas_form.onsubmit = function(e)
+{
+  e.preventDefault();
+  pas = document.getElementById("pas");
 }
 
 function load_data () {
