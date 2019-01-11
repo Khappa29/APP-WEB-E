@@ -98,6 +98,13 @@
     <input type="submit" value="Comparer">
   </form>
   </fieldset>
+  <fieldset>
+  <legend> Paramètres généraux </legend>
+  <form id="parametres" action='YearSpan'>
+    Pas de temps: <input id="pas" type="text" name="pas"><br>
+    <input type="submit" value="Ok">
+  </form>
+  </fieldset>
 
 <div id="reponse">
   <p align="center"></p>
@@ -128,7 +135,7 @@ station_form.onsubmit = function(e)
     // On récupère les différentes données
     var debut = document.getElementById("debut");
     var fin = document.getElementById("fin");
-    //var pas = document.getElementById("pas");
+    var pas = document.getElementById("pas");
     var STAID = document.getElementById("STAID");
     var image =  document.querySelector('#reponse img');
     // On initialise une nouvelle requête
@@ -143,7 +150,7 @@ station_form.onsubmit = function(e)
     // Animation GIF entre l'envoi de la requête et la réception de le réponse
     image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
     // Envoi de la requête
-    xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current,true /* + "&pas=" + pas.value*/,true);
+    xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current + "&pas=" + pas.value,true);
     xhr.send();
     console.log("Request send");
   }
@@ -162,6 +169,7 @@ station_comp.onsubmit = function(e)
   var debut = document.getElementById("debut");
   var fin = document.getElementById("fin");
   var image =  document.querySelector('#reponse img');
+  var pas = document.getElementById("pas");
 
   var xhr = new XMLHttpRequest();
 
@@ -172,7 +180,7 @@ station_comp.onsubmit = function(e)
   }
 
   image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
-  xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value,true);
+  xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value + "&pas=" + pas.value,true);
   xhr.send();
   console.log("Request send");
   
@@ -188,6 +196,7 @@ year_comp.onsubmit = function(e)
   var annee1 = document.getElementById("annee1");
   var annee2 = document.getElementById("annee2");
   var image =  document.querySelector('#reponse img');
+  var pas = document.getElementById("pas");
 
   var xhr = new XMLHttpRequest();
 
@@ -198,7 +207,7 @@ year_comp.onsubmit = function(e)
   }
 
   image.src = 'https://thumbs.gfycat.com/LameDifferentBalloonfish-small.gif';
-  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value,true);
+  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value,true);
   xhr.send();
   console.log("Request sent");
 }
