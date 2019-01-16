@@ -71,9 +71,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on demande la station
     if self.path_info[0] == 'regions':
         self.send_regions()
-    # on demande la station
-    elif self.path_info[0] == 'temperature':
-        self.send_image()
     # on spécifie un intervalle d'années
     elif self.path_info[0] == 'YearSpan':
         self.send_image(1)
@@ -177,58 +174,37 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     conn = sqlite3.connect(database)
     c = conn.cursor()
     
-    #Disjonction de cas selon le mode (plutôt que d'écrire 3 fonctions différents)
-    # cette fonction est appelée ligne 50 par là... (03/01/2019)
-    if mode == 0:
-        if len(self.path_info) <= 1 or self.path_info[1] == '' : # pas de paramètre => liste par défaut
-            # Definition des régions et des couleurs de tracé
-            STAID = '37' #Ne sert à rien
-        else:
-            # On teste que la station demandée existe bien
-            c.execute("SELECT DISTINCT STAID FROM 'TG_1978-2018'")
-            reg = c.fetchall()
-            if (self.path_info[1],) in reg:   # Rq: reg est une liste de tuples
-              STAID = self.path_info[1]
-            else:
-                print ('Erreur nom')
-                self.send_error(404)    # Région non trouvée -> erreur 404
-                return None
+    #Disjonction de cas selon le mode (plutôt que d'écrire 3 fonctions différents)   
+    STAID = self.params['STAID'][0]
+    try:
+        debut = int(self.params['debut'][0])
+    except:
+        debut = 1978
+    try:
+        fin = int(self.params['fin'][0])
+    except:
+        fin = 2018
+        
+    # On sécurise les données qu'on traite
+    if fin < debut:
+        debut, fin = fin, debut
+    elif fin == debut:
+        fin += 1
             
-        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))  # STAID[0][0]
-        r = c.fetchall()
-        # On récupères les données
+    if mode == 2:
+        ST2 = self.params['ST2'][0]
         
-    else:
-        STAID = self.params['STAID'][0]
-        try:
-            debut = int(self.params['debut'][0])
-        except:
-            debut = 1978
-        try:
-            fin = int(self.params['fin'][0])
-        except:
-            fin = 2018
-        
-        # On sécurise les données qu'on traite
-        if fin < debut:
-            debut, fin = fin, debut
-        elif fin == debut:
-            fin += 1
-            
-        if mode == 2:
-            ST2 = self.params['ST2'][0]
-        
-        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
-        r = c.fetchall()
-        R = []
-        # On ne garde que les éléments qui sont les bonnes années
-        # On peut le faire directement dans la requête SQL mais flemme et c'est plus safe
-        for elem in r:
-            year = int(elem[2][0:4])
-            #print(year,debut,fin)
-            if year >= debut and year <= fin:
-                R.append(elem)
-        r = R
+    c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    r = c.fetchall()
+    R = []
+    # On ne garde que les éléments qui sont les bonnes années
+    # On peut le faire directement dans la requête SQL mais flemme et c'est plus safe
+    for elem in r:
+        year = int(elem[2][0:4])
+        #print(year,debut,fin)
+        if year >= debut and year <= fin:
+            R.append(elem)
+    r = R
     
     try:
         pas = int(self.params['pas'][0])
