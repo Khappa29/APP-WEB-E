@@ -41,35 +41,38 @@
 <fieldset>
   <legend> Paramètres généraux </legend>
   <form id="pas_form" action='SetPas'>
-    Pas de temps (Jours): <input id="pas" type="number" name="pas" min=1><br>
-    Données à afficher:
-    <div><input type="radio" name="moyenne" value="min" id="min" /> <label for="min">Minimum</label></div>
+    <table>
+    <tr><td>Pas de temps (Jours):</td> <td><input id="pas" type="number" name="pas" min=1></td><td></td></tr>
+    <tr><td>Données à afficher:</td>
+    <td><div><input type="radio" name="moyenne" value="min" id="min" /> <label for="min">Minimum</label></div>
     <div><input type="radio" name="moyenne" value="moy" id="moy" checked /> <label for="moy">Moyenne</label></div>
-    <div><input type="radio" name="moyenne" value="max" id="max" /> <label for="max">Maximum</label></div>
-    <input type="submit" value="Ok">
+    <div><input type="radio" name="moyenne" value="max" id="max" /> <label for="max">Maximum</label></div></td><td><input type="submit" value="Ok"></td></tr> 
+    </table>
   </form>
 </fieldset>
-
 <fieldset>
   <legend> Évolution de la température entre deux années  </legend>
   <form id="station_form" action='YearSpan'>
-    Année de début: <input id="debut" type="number" name="debut" min=1978 max=2018><br>
-    Année de fin: <input id="fin" type="number" name="fin" min=1978 max=2018><br>
-    
-    <input type="submit" value="Ok">
+  <table>
+    <tr><td>Année de début:</td><td><input id="debut" type="number" name="debut" min=1978 max=2018></td><td></td></tr>
+    <tr><td>Année de fin:</td><td><input id="fin" type="number" name="fin" min=1978 max=2018></td>
+    <td><input type="submit" value="Ok"></td></tr>
+  </table>
   </form>
   </fieldset>
   <fieldset>
   <legend> Comparez deux années pour une même station </legend>
   <form id="year_comp" action='YearComp'>
-    Année n°1: <input id="annee1" type="number" name="annee1" min=1978 max=2018><br>
-    Année n°2: <input id="annee2" type="number" name="annee2" min=1978 max=2018><br>
-    <input type="submit" value="Ok">
+    <table>
+    <tr><td>Année n°1:</td><td><input id="annee1" type="number" name="annee1" min=1978 max=2018></td><td></td></tr>
+    <tr><td>Année n°2:</td><td><input id="annee2" type="number" name="annee2" min=1978 max=2018></td>
+    <td><input type="submit" value="Ok"></td></tr></table>
   </form>
   </fieldset>
   <fieldset>
   <legend> Comparer deux stations différentes </legend>
    <form id="station_comp" action='compareSta'>
+   <table><tr><td>
    <label for="Stations">Stations à comparer : </label>
    <select name="Stations" id="ST2">
    <option value="736"> Abbeville</option>
@@ -115,9 +118,9 @@
    <option value="756"> Tarbes</option>
    <option value="33"> Toulouse</option>
    <option value="2190"> Tours</option>
-   </select>
+   </select></td>
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
-    <input type="submit" value="Comparer">
+    <td><input type="submit" value="Comparer"></td></tr></table>
   </form>
   </fieldset>
 </div>
