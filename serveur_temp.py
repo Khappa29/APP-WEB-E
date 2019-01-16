@@ -268,7 +268,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     plt.title('Températures au cours du temps',fontsize=16) 
 
     # génération des courbes dans un fichier PNG
-    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'.png'
+    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'_debut&fin'+str(debut)+str(fin)+'.png'
     #fichier = 'courbes/temperature.png'
     plt.savefig('client/{}'.format(fichier))
     plt.close()
@@ -362,7 +362,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     plt.title('Températures entre deux années',fontsize=16) 
 
     # génération des courbes dans un fichier PNG
-    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'.png'
+    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'_debut&fin'+str(debut)+str(fin)+'.png'
     #fichier = 'courbes/temperature.png'
     plt.savefig('client/{}'.format(fichier))
     plt.close()
