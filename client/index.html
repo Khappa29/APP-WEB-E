@@ -266,7 +266,7 @@ function OnMarkerClick (e) {
 
   current = e.target.idreg;
   image.src = loading_anim;
-  xhr.open('GET','/temperature/' + e.target.idreg, true);  // on récupère la courbe par un appel au serveur
+  xhr.open('GET','/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current + "&pas=" + pas.value,true);  // on récupère la courbe par un appel au serveur
   xhr.send();
 }
 
