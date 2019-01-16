@@ -167,7 +167,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     ax.xaxis.set_major_locator(pltd.YearLocator())
     ax.xaxis.set_minor_locator(pltd.MonthLocator())
     ax.xaxis.set_major_formatter(pltd.DateFormatter('%Y'))
-    ax.xaxis.set_tick_params(labelsize=5)
+    ax.xaxis.set_tick_params(labelsize=8)
     ax.xaxis.set_label_text("Date")
     ax.yaxis.set_label_text("Temperature (en degré)")
     
