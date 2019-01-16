@@ -19,6 +19,9 @@ def multiplication_liste(L):
     return (res)
 
 def pas_de_temps(r,pas):
+    # On sécurise les données possibles pour le pas
+    if pas<1:
+        pas = 1
     # Information sur la date
     x = [pltd.date2num(dt.date(int(a[2][0:4]),int(a[2][4:6]),int(a[2][6:]))) for a in r]
     # Information sur la temperature, avec dilatation
