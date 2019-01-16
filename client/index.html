@@ -41,7 +41,7 @@
 <fieldset>
   <legend> Paramètres généraux </legend>
   <form id="pas_form" action='SetPas'>
-    Pas de temps (Jours): <input id="pas" type="number" name="pas"><br>
+    Pas de temps (Jours): <input id="pas" type="number" name="pas" min=1><br>
     <input type="submit" value="Ok">
   </form>
 </fieldset>
@@ -49,8 +49,8 @@
 <fieldset>
   <legend> Évolution de la température entre deux années  </legend>
   <form id="station_form" action='YearSpan'>
-    Année de début: <input id="debut" type="number" name="debut"><br>
-    Année de fin: <input id="fin" type="number" name="fin"><br>
+    Année de début: <input id="debut" type="number" name="debut" min=1978 max=2018><br>
+    Année de fin: <input id="fin" type="number" name="fin" min=1978 max=2018><br>
     
     <input type="submit" value="Ok">
   </form>
@@ -58,8 +58,8 @@
   <fieldset>
   <legend> Comparez deux années pour une même station </legend>
   <form id="year_comp" action='YearComp'>
-    Année n°1: <input id="annee1" type="number" name="annee1"><br>
-    Année n°2: <input id="annee2" type="number" name="annee2"><br>
+    Année n°1: <input id="annee1" type="number" name="annee1" min=1978 max=2018><br>
+    Année n°2: <input id="annee2" type="number" name="annee2" min=1978 max=2018><br>
     <input type="submit" value="Ok">
   </form>
   </fieldset>
