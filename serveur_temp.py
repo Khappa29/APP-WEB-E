@@ -212,8 +212,13 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         pas = 1
     x,y = pas_de_temps(r,pas)
         
-        # tracé de la courbe
-    plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label="Temperature St n°"+str(STAID))
+    # tracé de la courbe
+    conn = sqlite3.connect(database)
+    c = conn.cursor()
+    c.execute("SELECT STANAME FROM 'stations-meteo' WHERE STAID=?",(STAID,))
+    nom = c.fetchall()
+    nom = nom[0][0]
+    plt.plot(x,y,linewidth=0.2, linestyle='-', marker='o', color="blue", label=nom)
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
@@ -235,7 +240,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
         x,y = pas_de_temps(R,pas)
         
         # tracé de la courbe pour la deuxième station
-        plt.plot(x,y,linewidth=0.2, linestyle='-', marker='x', color="red", label="Temperature St n°" + ST2)
+        conn = sqlite3.connect(database)
+        c = conn.cursor()
+        c.execute("SELECT STANAME FROM 'stations-meteo' WHERE STAID=?",(ST2,))
+        nom = c.fetchall()
+        nom = nom[0][0]
+        plt.plot(x,y,linewidth=0.2, linestyle='-', marker='x', color="red", label=nom)
             
     # légendes
     plt.legend(loc='lower left')
@@ -252,7 +262,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     '<meta charset="utf-8">' +\
     '<img src="/{}?{}" alt="temperature {}" width="100%">'.format(fichier,self.date_time_string(),self.path)"""
     body = json.dumps({
-            'title': 'Température pour la station n° '+STAID, \
+            'title': 'Température pour la station '+nom, \
             'img': '/'+fichier \
              });
     # on envoie
