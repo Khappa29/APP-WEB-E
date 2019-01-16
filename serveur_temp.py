@@ -208,7 +208,13 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             fin = int(self.params['fin'][0])
         except:
             fin = 2018
-        #pas = int(self.params['pas'][0])
+        
+        # On sécurise les données qu'on traite
+        if fin < debut:
+            debut, fin = fin, debut
+        elif fin == debut:
+            fin += 1
+            
         if mode == 2:
             ST2 = self.params['ST2'][0]
         
