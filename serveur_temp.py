@@ -171,6 +171,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     ax.xaxis.set_label_text("Date")
     ax.yaxis.set_label_text("Temperature (en degré)")
     
+    #On regarde si on étudie la température moyenne, max ou min
+    try:
+        m = self.params['m'][0]
+    except:
+        m = 'moy'
+    
     conn = sqlite3.connect(database)
     c = conn.cursor()
     
@@ -194,7 +200,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     if mode == 2:
         ST2 = self.params['ST2'][0]
         
-    c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    if m == 'min':
+        c.execute("SELECT * FROM 'TN_1978-2018' WHERE STAID=?",(STAID,))
+    elif m == 'moy':
+        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    elif m == 'max':
+        c.execute("SELECT * FROM 'TX_1978-2018' WHERE STAID=?",(STAID,))
     r = c.fetchall()
     R = []
     # On ne garde que les éléments qui sont les bonnes années
@@ -222,7 +233,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
             
     if mode == 2:
         #print("PARAMS: ",self.params['ST2'])
-        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(ST2,))
+        if m == 'min':
+            c.execute("SELECT * FROM 'TN_1978-2018' WHERE STAID=?",(ST2,))
+        elif m == 'moy':
+            c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(ST2,))
+        elif m == 'max':
+            c.execute("SELECT * FROM 'TX_1978-2018' WHERE STAID=?",(ST2,))
         r = c.fetchall()
         R = []
         # On ne garde que les éléments qui sont les bonnes années
@@ -252,7 +268,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     plt.title('Températures au cours du temps',fontsize=16) 
 
     # génération des courbes dans un fichier PNG
-    fichier = 'courbes/temperature_'+str(STAID) +'.png'
+    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'.png'
     #fichier = 'courbes/temperature.png'
     plt.savefig('client/{}'.format(fichier))
     plt.close()
@@ -292,12 +308,23 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     conn = sqlite3.connect(database)
     c = conn.cursor()
     
+    #On regarde si on étudie la température moyenne, max ou min
+    try:
+        m = self.params['m'][0]
+    except:
+        m = 'moy'
+    
     STAID = self.params['STAID'][0]
     annee1 = int(self.params['annee1'][0])
     annee2 = int(self.params['annee2'][0])
     #pas = int(self.params['pas'][0])
     
-    c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    if m == 'min':
+        c.execute("SELECT * FROM 'TN_1978-2018' WHERE STAID=?",(STAID,))
+    elif m == 'moy':
+        c.execute("SELECT * FROM 'TG_1978-2018' WHERE STAID=?",(STAID,))
+    elif m == 'max':
+        c.execute("SELECT * FROM 'TX_1978-2018' WHERE STAID=?",(STAID,))
     r = c.fetchall()
     R1 = []
     R2 = []
@@ -335,7 +362,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     plt.title('Températures entre deux années',fontsize=16) 
 
     # génération des courbes dans un fichier PNG
-    fichier = 'courbes/temperature_'+str(STAID) +'.png'
+    fichier = 'courbes/temperature_'+str(STAID)+'_pas'+str(pas)+'_'+m+'.png'
     #fichier = 'courbes/temperature.png'
     plt.savefig('client/{}'.format(fichier))
     plt.close()
