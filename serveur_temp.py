@@ -161,7 +161,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     plt.rcParams.update({'font.size': 22})
     fig1 = plt.figure(figsize=(18,6))
     ax = fig1.add_subplot(111)
-    ax.set_ylim(bottom=-5,top=35)
+    ax.set_ylim(bottom=-7,top=35)
     ax.grid(which='major', color='#888888', linestyle='-')
     ax.grid(which='minor',axis='x', color='#888888', linestyle=':')
     ax.xaxis.set_major_locator(pltd.YearLocator())
