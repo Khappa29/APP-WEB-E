@@ -42,6 +42,10 @@
   <legend> Paramètres généraux </legend>
   <form id="pas_form" action='SetPas'>
     Pas de temps (Jours): <input id="pas" type="number" name="pas" min=1><br>
+    Données à afficher:
+    <div><input type="radio" name="moyenne" value="min" id="min" /> <label for="min">Minimum</label></div>
+    <div><input type="radio" name="moyenne" value="moy" id="moy" checked /> <label for="moy">Moyenne</label></div>
+    <div><input type="radio" name="moyenne" value="max" id="max" /> <label for="max">Maximum</label></div>
     <input type="submit" value="Ok">
   </form>
 </fieldset>
@@ -130,6 +134,7 @@
 var map = L.map('map').setView([46.3,2], 5.5);
 var current = -1;
 var pas = 1;
+var m = 'moy';
 var loading_anim = 'loading.gif';
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -164,7 +169,7 @@ station_form.onsubmit = function(e)
     // Animation GIF entre l'envoi de la requête et la réception de le réponse
     image.src = loading_anim;
     // Envoi de la requête
-    xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current + "&pas=" + pas.value,true);
+    xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current + "&pas=" + pas.value + "&m=" + m,true);
     xhr.send();
     console.log("Request send");
   }
@@ -193,7 +198,7 @@ station_comp.onsubmit = function(e)
   }
 
   image.src = loading_anim;
-  xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value + "&pas=" + pas.value,true);
+  xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value + "&pas=" + pas.value + "&m=" + m,true);
   xhr.send();
   console.log("Request send");
   
@@ -219,7 +224,7 @@ year_comp.onsubmit = function(e)
   }
 
   image.src = loading_anim;
-  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value,true);
+  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value + "&m=" + m,true);
   xhr.send();
   console.log("Request sent");
 }
@@ -229,6 +234,14 @@ pas_form.onsubmit = function(e)
 {
   e.preventDefault();
   pas = document.getElementById("pas");
+	
+  min = document.getElementById("min");
+  moy = document.getElementById("moy");
+  max = document.getElementById("max");
+  
+  if(min.checked){m = min.value}
+  if(moy.checked){m = moy.value}
+  if(max.checked){m = max.value}
 }
 
 function load_data () {
@@ -266,7 +279,7 @@ function OnMarkerClick (e) {
 
   current = e.target.idreg;
   image.src = loading_anim;
-  xhr.open('GET','/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current + "&pas=" + pas.value,true);  // on récupère la courbe par un appel au serveur
+  xhr.open('GET','/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current + "&pas=" + pas.value + "&m=" + m,true);  // on récupère la courbe par un appel au serveur
   xhr.send();
 }
 
