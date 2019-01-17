@@ -46,7 +46,7 @@
     <tr><td>Données à afficher:</td>
     <td><div><input type="radio" name="moyenne" value="min" id="min" /> <label for="min">Minimum</label></div>
     <div><input type="radio" name="moyenne" value="moy" id="moy" checked /> <label for="moy">Moyenne</label></div>
-    <div><input type="radio" name="moyenne" value="max" id="max" /> <label for="max">Maximum</label></div></td><td><input type="submit" value="Ok"></td></tr> 
+    <div><input type="radio" name="moyenne" value="max" id="max" /> <label for="max">Maximum</label></div></td><td><input type="submit" value="Ok" onclick="location.href='#reponse';"></td></tr> 
     </table>
   </form>
 </fieldset>
@@ -56,7 +56,7 @@
   <table>
     <tr><td>Année de début:</td><td><input id="debut" type="number" name="debut" min=1978 max=2018></td><td></td></tr>
     <tr><td>Année de fin:</td><td><input id="fin" type="number" name="fin" min=1978 max=2018></td>
-    <td><input type="submit" value="Ok"></td></tr>
+    <td><input type="submit" value="Ok" onclick="location.href='#reponse';"></td></tr>
   </table>
   </form>
   </fieldset>
@@ -66,7 +66,7 @@
     <table>
     <tr><td>Année n°1:</td><td><input id="annee1" type="number" name="annee1" min=1978 max=2018></td><td></td></tr>
     <tr><td>Année n°2:</td><td><input id="annee2" type="number" name="annee2" min=1978 max=2018></td>
-    <td><input type="submit" value="Ok"></td></tr></table>
+    <td><input type="submit" value="Ok" onclick="location.href='#reponse';"></td></tr></table>
   </form>
   </fieldset>
   <fieldset>
@@ -120,7 +120,7 @@
    <option value="2190"> Tours</option>
    </select></td>
     <!--Numéro de station: <input id="STAID" type="text" name="STAID"><br>-->
-    <td><input type="submit" value="Comparer"></td></tr></table>
+    <td><input type="submit" value="Comparer" onclick="location.href='#reponse';"></td></tr></table>
   </form>
   </fieldset>
 </div>
@@ -304,6 +304,7 @@ function OnMarkerClick (e) {
   chemin = '/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current
   xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);  // on récupère la courbe par un appel au serveur
   xhr.send();
+  location.href='#reponse';
 }
 
 </script>
