@@ -138,6 +138,7 @@ var map = L.map('map').setView([46.3,2], 5.5);
 var current = -1;
 var pas = 1;
 var m = 'moy';
+var chemin = '/YearSpan?debut1978&fin=2018&STAID=37';
 var loading_anim = 'loading.gif';
 // Ajout d'une couche de dalles OpenStreetMap
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
@@ -172,7 +173,8 @@ station_form.onsubmit = function(e)
     // Animation GIF entre l'envoi de la requête et la réception de le réponse
     image.src = loading_anim;
     // Envoi de la requête
-    xhr.open('GET','/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current + "&pas=" + pas.value + "&m=" + m,true);
+    chemin = '/YearSpan?debut=' + debut.value + "&fin=" + fin.value + "&STAID=" + current
+    xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);
     xhr.send();
     console.log("Request send");
   }
@@ -201,7 +203,8 @@ station_comp.onsubmit = function(e)
   }
 
   image.src = loading_anim;
-  xhr.open('GET','/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value + "&pas=" + pas.value + "&m=" + m,true);
+  chemin = '/STComp?STAID=' + current + "&ST2=" + ST2.value + "&debut=" + debut.value + "&fin=" + fin.value
+  xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);
   xhr.send();
   console.log("Request send");
   
@@ -227,7 +230,8 @@ year_comp.onsubmit = function(e)
   }
 
   image.src = loading_anim;
-  xhr.open('GET','/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value + "&pas=" + pas.value + "&m=" + m,true);
+  chemin = '/YearComp?STAID=' + current + "&annee1=" + annee1.value + "&annee2=" + annee2.value
+  xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);
   xhr.send();
   console.log("Request sent");
 }
@@ -245,6 +249,21 @@ pas_form.onsubmit = function(e)
   if(min.checked){m = min.value}
   if(moy.checked){m = moy.value}
   if(max.checked){m = max.value}
+	
+  var image =  document.querySelector('#reponse img');
+
+  var xhr = new XMLHttpRequest();
+
+  xhr.onload = function()
+  {
+    console.log("Response received");
+    image.src = '/courbes/temperature_' + current + '.png?' + new Date().getTime();
+  }
+
+  image.src = loading_anim;
+  xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);
+  xhr.send();
+  console.log("Request sent");
 }
 
 function load_data () {
@@ -282,7 +301,8 @@ function OnMarkerClick (e) {
 
   current = e.target.idreg;
   image.src = loading_anim;
-  xhr.open('GET','/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current + "&pas=" + pas.value + "&m=" + m,true);  // on récupère la courbe par un appel au serveur
+  chemin = '/YearSpan?debut=' + 1978 + "&fin=" + 2018 + "&STAID=" + current
+  xhr.open('GET',chemin + "&pas=" + pas.value + "&m=" + m,true);  // on récupère la courbe par un appel au serveur
   xhr.send();
 }
 
